@@ -26,7 +26,8 @@ public class CocktailController {
     @GetMapping
     @RequestMapping(value = "/cocktails", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<CocktailResource> getCocktails(@RequestParam String search) {
+//    public List<CocktailResource> getCocktails(@RequestParam String search) {     geeft anders fail install
+    public List<CocktailResource> getCocktails() {
 //        MockHttpServletResponse:
 //        Status = 400
 //        Error message = Required String parameter 'search' is not present

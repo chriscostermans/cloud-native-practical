@@ -70,7 +70,7 @@ public class ShoppingListControllerTest {
 
 
     @Test
-    public void getShoppingListsIngredientsTest() throws Exception {
+    public void getShoppingListIngredientsTest() throws Exception {
 //        final UUID expectedId = UUID.fromString("eb18bb7c-61f3-4c9f-981c-55b1b8ee8915"); dit werkt niet, shoppingListId is nochtans UUID ??
         final String expectedId = "eb18bb7c-61f3-4c9f-981c-55b1b8ee8915";       // pathvariable
         final String expectedName = "Stephanie's birthday";                     // response
