@@ -29,7 +29,7 @@ public class CocktailControllerTests {
 
     @Test
     void getCocktailsTest() throws Exception {
-        mockMvc.perform(get("/cocktails")
+        mockMvc.perform(get("/cocktails?search=Russian")
             .accept(MediaType.parseMediaType("application/json")))
 //        Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'search' is not present]
 //        MockHttpServletResponse:
