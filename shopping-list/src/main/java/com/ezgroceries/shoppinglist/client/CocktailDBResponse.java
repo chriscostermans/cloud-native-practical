@@ -20,8 +20,7 @@ public class CocktailDBResponse {
     }
 
     public static class DrinkResource {
-//        private String idDrink;
-        private UUID idDrink;
+        private String idDrink;
         private String strDrink;
         private String strGlass;
         private String strInstructions;
@@ -42,19 +41,11 @@ public class CocktailDBResponse {
         private String strIngredient14;
         private String strIngredient15;
 
-//        public String getIdDrink() {
-//            return idDrink;
-//        }
-//
-//        public void setIdDrink(String idDrink) {
-//            this.idDrink = idDrink;
-//        }
-
-        public UUID getIdDrink() {
+        public String getIdDrink() {
             return idDrink;
         }
 
-        public void setIdDrink(UUID idDrink) {
+        public void setIdDrink(String idDrink) {
             this.idDrink = idDrink;
         }
 

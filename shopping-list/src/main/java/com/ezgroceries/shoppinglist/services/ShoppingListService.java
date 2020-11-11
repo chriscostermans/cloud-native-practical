@@ -25,11 +25,11 @@ public class ShoppingListService {
     }
 
 //    public CocktailList addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){
-    public List<UUID> addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){
+    public List<String> addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){
         shoppingList.setShoppingListId(shoppingListId);
         shoppingList.setCocktailId(cocktailResource.stream().map(this::fillCocktailId).collect(Collectors.toList()));
 
-        List<UUID> cocktailIds = new ArrayList<UUID>(cocktailResource.size());
+        List<String> cocktailIds = new ArrayList<String>(cocktailResource.size());
         for (CocktailResource cocktail : cocktailResource) {
             cocktailIds.add(cocktail.getCocktailId());
         }
@@ -48,9 +48,9 @@ public class ShoppingListService {
 //        return cocktailIds;
     }
 
-    private UUID fillCocktailId(CocktailResource cocktailResources)  {
+    private String fillCocktailId(CocktailResource cocktailResources)  {
 //        CocktailList cocktailId = new CocktailList();
-        UUID id = cocktailResources.getCocktailId();
+        String id = cocktailResources.getCocktailId();
         return id;
     }
 

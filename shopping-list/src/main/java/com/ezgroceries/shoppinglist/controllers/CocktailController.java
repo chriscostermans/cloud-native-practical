@@ -56,38 +56,51 @@ public class CocktailController {
     private List<String> getIngredients(CocktailDBResponse.DrinkResource drinkResource) {
         List<String> ingredientList = new ArrayList<>();
         ingredientList.add(drinkResource.getStrIngredient1());
-        ingredientList.add(drinkResource.getStrIngredient2());
-        ingredientList.add(drinkResource.getStrIngredient3());
-        ingredientList.add(drinkResource.getStrIngredient4());
-        ingredientList.add(drinkResource.getStrIngredient5());
-        ingredientList.add(drinkResource.getStrIngredient6());
-        ingredientList.add(drinkResource.getStrIngredient7());
-        ingredientList.add(drinkResource.getStrIngredient8());
-        ingredientList.add(drinkResource.getStrIngredient9());
-        ingredientList.add(drinkResource.getStrIngredient10());
-        ingredientList.add(drinkResource.getStrIngredient11());
-        ingredientList.add(drinkResource.getStrIngredient12());
-        ingredientList.add(drinkResource.getStrIngredient13());
-        ingredientList.add(drinkResource.getStrIngredient14());
-        ingredientList.add(drinkResource.getStrIngredient15());
+        if (drinkResource.getStrIngredient2()!=null)
+            ingredientList.add(drinkResource.getStrIngredient2());
+        if (drinkResource.getStrIngredient3()!=null)
+            ingredientList.add(drinkResource.getStrIngredient3());
+        if (drinkResource.getStrIngredient4()!=null)
+            ingredientList.add(drinkResource.getStrIngredient4());
+        if (drinkResource.getStrIngredient5()!=null)
+            ingredientList.add(drinkResource.getStrIngredient5());
+        if (drinkResource.getStrIngredient6()!=null)
+            ingredientList.add(drinkResource.getStrIngredient6());
+        if (drinkResource.getStrIngredient7()!=null)
+            ingredientList.add(drinkResource.getStrIngredient7());
+        if (drinkResource.getStrIngredient8()!=null)
+            ingredientList.add(drinkResource.getStrIngredient8());
+        if (drinkResource.getStrIngredient9()!=null)
+            ingredientList.add(drinkResource.getStrIngredient9());
+        if (drinkResource.getStrIngredient10()!=null)
+            ingredientList.add(drinkResource.getStrIngredient10());
+        if (drinkResource.getStrIngredient11()!=null)
+            ingredientList.add(drinkResource.getStrIngredient11());
+        if (drinkResource.getStrIngredient12()!=null)
+            ingredientList.add(drinkResource.getStrIngredient12());
+        if (drinkResource.getStrIngredient13()!=null)
+            ingredientList.add(drinkResource.getStrIngredient13());
+        if (drinkResource.getStrIngredient14()!=null)
+            ingredientList.add(drinkResource.getStrIngredient14());
+        if (drinkResource.getStrIngredient15()!=null)
+            ingredientList.add(drinkResource.getStrIngredient15());
 
         return ingredientList;
     }
 
-
-    private List<CocktailResource> getDummyResources() {
-        return Arrays.asList(
-            new CocktailResource(
-                UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"), "Margerita",
-                "Cocktail glass",
-                "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten..",
-                "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg",
-                Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")),
-            new CocktailResource(
-                UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab073"), "Blue Margerita",
-                "Cocktail glass",
-                "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
-                "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
-                Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
-    }
+//    private List<CocktailResource> getDummyResources() {
+//        return Arrays.asList(
+//            new CocktailResource(
+//                UUID.fromString("23b3d85a-3928-41c0-a533-6538a71e17c4"), "Margerita",
+//                "Cocktail glass",
+//                "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten..",
+//                "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg",
+//                Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt")),
+//            new CocktailResource(
+//                UUID.fromString("d615ec78-fe93-467b-8d26-5d26d8eab073"), "Blue Margerita",
+//                "Cocktail glass",
+//                "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt..",
+//                "https://www.thecocktaildb.com/images/media/drink/qtvvyq1439905913.jpg",
+//                Arrays.asList("Tequila", "Blue Curacao", "Lime juice", "Salt")));
+//    }
 }

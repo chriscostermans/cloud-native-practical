@@ -49,7 +49,7 @@ public class ShoppingListController {
     @RequestMapping(value = "/shopping-lists/{shoppingListId}/cocktails", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
 //    public CocktailList addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
-    public List<UUID> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
+    public List<String> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
         return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktailResource);
     }
 
