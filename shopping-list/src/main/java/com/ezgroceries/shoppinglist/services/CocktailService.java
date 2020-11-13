@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @since release/ (2020-11-01)
  */
 @Service
-public class CocktailResourceService {
+public class CocktailService {
 
     CocktailResource cocktailResource = new CocktailResource();
 
