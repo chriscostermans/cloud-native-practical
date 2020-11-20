@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.internal;
+package com.ezgroceries.shoppinglist.internal.cocktail;
 
 import java.util.Arrays;
 import java.util.HashSet;

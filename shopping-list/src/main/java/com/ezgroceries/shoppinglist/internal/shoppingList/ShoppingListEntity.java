@@ -1,9 +1,9 @@
-package com.ezgroceries.shoppinglist.internal;
+package com.ezgroceries.shoppinglist.internal.shoppingList;
 
+import com.ezgroceries.shoppinglist.internal.cocktail.CocktailEntity;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,11 +24,10 @@ public class ShoppingListEntity {
 
     private String name;
 
-//    of omgekeerd inverse <> join ??
     @ManyToMany
     @JoinTable(name = "COCKTAIL_SHOPPING_LIST",
-        joinColumns = @JoinColumn(name = "COCKTAIL_ID"),
-        inverseJoinColumns = @JoinColumn(name = "SHOPPING_LIST_ID"))
+        joinColumns = @JoinColumn(name = "SHOPPING_LIST_ID"),
+        inverseJoinColumns = @JoinColumn(name = "COCKTAIL_ID"))
     private List<CocktailEntity> cocktails;
 
     public ShoppingListEntity (String name){
