@@ -18,6 +18,7 @@ public class CocktailResource {
 
     public CocktailResource() {
     }
+
     public CocktailResource(String cocktailId, String name, String glass, String instructions, String image, List<String> ingredients) {
         this.cocktailId = cocktailId;
         this.name = name;

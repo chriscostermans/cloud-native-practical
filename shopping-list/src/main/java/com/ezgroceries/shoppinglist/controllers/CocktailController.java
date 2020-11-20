@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import jdk.internal.joptsimple.internal.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,38 +57,52 @@ public class CocktailController {
     }
 
     private List<String> getIngredients(CocktailDBResponse.DrinkResource drinkResource) {
-        List<String> ingredientList = new ArrayList<>();
-        ingredientList.add(drinkResource.getStrIngredient1());
-        if (drinkResource.getStrIngredient2()!=null)
-            ingredientList.add(drinkResource.getStrIngredient2());
-        if (drinkResource.getStrIngredient3()!=null)
-            ingredientList.add(drinkResource.getStrIngredient3());
-        if (drinkResource.getStrIngredient4()!=null)
-            ingredientList.add(drinkResource.getStrIngredient4());
-        if (drinkResource.getStrIngredient5()!=null)
-            ingredientList.add(drinkResource.getStrIngredient5());
-        if (drinkResource.getStrIngredient6()!=null)
-            ingredientList.add(drinkResource.getStrIngredient6());
-        if (drinkResource.getStrIngredient7()!=null)
-            ingredientList.add(drinkResource.getStrIngredient7());
-        if (drinkResource.getStrIngredient8()!=null)
-            ingredientList.add(drinkResource.getStrIngredient8());
-        if (drinkResource.getStrIngredient9()!=null)
-            ingredientList.add(drinkResource.getStrIngredient9());
-        if (drinkResource.getStrIngredient10()!=null)
-            ingredientList.add(drinkResource.getStrIngredient10());
-        if (drinkResource.getStrIngredient11()!=null)
-            ingredientList.add(drinkResource.getStrIngredient11());
-        if (drinkResource.getStrIngredient12()!=null)
-            ingredientList.add(drinkResource.getStrIngredient12());
-        if (drinkResource.getStrIngredient13()!=null)
-            ingredientList.add(drinkResource.getStrIngredient13());
-        if (drinkResource.getStrIngredient14()!=null)
-            ingredientList.add(drinkResource.getStrIngredient14());
-        if (drinkResource.getStrIngredient15()!=null)
-            ingredientList.add(drinkResource.getStrIngredient15());
+        return
+        Stream.of(
+            drinkResource.getStrIngredient1(),
+            drinkResource.getStrIngredient2(),
+            drinkResource.getStrIngredient3(),
+            drinkResource.getStrIngredient4(),
+            drinkResource.getStrIngredient5(),
+            drinkResource.getStrIngredient6(),
+            drinkResource.getStrIngredient7()
+            ).filter(
+            i -> !Strings.isNullOrEmpty(i)
+            ).collect(
+            Collectors.toList());
 
-        return ingredientList;
+//        List<String> ingredientList = new ArrayList<>();
+//        ingredientList.add(drinkResource.getStrIngredient1());
+//        if (drinkResource.getStrIngredient2()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient2());
+//        if (drinkResource.getStrIngredient3()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient3());
+//        if (drinkResource.getStrIngredient4()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient4());
+//        if (drinkResource.getStrIngredient5()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient5());
+//        if (drinkResource.getStrIngredient6()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient6());
+//        if (drinkResource.getStrIngredient7()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient7());
+//        if (drinkResource.getStrIngredient8()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient8());
+//        if (drinkResource.getStrIngredient9()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient9());
+//        if (drinkResource.getStrIngredient10()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient10());
+//        if (drinkResource.getStrIngredient11()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient11());
+//        if (drinkResource.getStrIngredient12()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient12());
+//        if (drinkResource.getStrIngredient13()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient13());
+//        if (drinkResource.getStrIngredient14()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient14());
+//        if (drinkResource.getStrIngredient15()!=null)
+//            ingredientList.add(drinkResource.getStrIngredient15());
+
+//        return ingredientList;
     }
 
 //    private List<CocktailResource> getDummyResources() {
