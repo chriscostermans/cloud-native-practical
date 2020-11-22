@@ -1,5 +1,7 @@
 package com.ezgroceries.shoppinglist.services;
 
+import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListRepository;
 import com.ezgroceries.shoppinglist.resources.CocktailResource;
 import com.ezgroceries.shoppinglist.resources.ShoppingList;
 import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
@@ -17,11 +19,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShoppingListService {
 
+    private final ShoppingListRepository shoppingListRepository;
+
+    private final CocktailService cocktailService;
+
+    public ShoppingListService(ShoppingListRepository shoppingListRepository, CocktailService cocktailService) {
+        this.shoppingListRepository = shoppingListRepository;
+        this.cocktailService = cocktailService;
+    }
+
     ShoppingList shoppingList = new ShoppingList();
 
-    public ShoppingList createShoppingList(ShoppingList shoppingList){
-        shoppingList.setShoppingListId(UUID.randomUUID());
-        return shoppingList;
+    public ShoppingList createShoppingList(String name){
+        ShoppingListEntity shoppingListEntity = new ShoppingListEntity(name);
+        ShoppingListEntity saved = shoppingListRepository.save(shoppingListEntity);
+        return fromShoppingListEntity(saved);
     }
 
 //    public CocktailList addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){

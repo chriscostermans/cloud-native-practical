@@ -3,6 +3,7 @@ package com.ezgroceries.shoppinglist.controllers;
 import com.ezgroceries.shoppinglist.client.CocktailDBClient;
 import com.ezgroceries.shoppinglist.client.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.resources.CocktailResource;
+import com.ezgroceries.shoppinglist.services.CocktailService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,50 +27,57 @@ import org.springframework.web.bind.annotation.RestController;
 //@RequestMapping(value = "/cocktails", produces = "application/json")
 public class CocktailController {
 
-    private CocktailDBClient cocktailDBClient;
+    private final CocktailService cocktailService;
 
-    CocktailController(CocktailDBClient cocktailDBClient) {
-        this.cocktailDBClient = cocktailDBClient;
+    private CocktailController(CocktailService cocktailService) {
+        this.cocktailService = cocktailService;
     }
 
-//    Search cocktails
+//    private CocktailDBClient cocktailDBClient;
+//    CocktailController(CocktailDBClient cocktailDBClient) {
+//        this.cocktailDBClient = cocktailDBClient;
+//    }
+
+
+    //    Search cocktails
     @GetMapping
     @RequestMapping(value = "/cocktails", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<CocktailResource> getCocktails(@RequestParam String search) {
-        CocktailDBResponse cocktailDBResponse = cocktailDBClient.searchCocktails(search);
-        List<CocktailResource> cocktailResourceList = new ArrayList<>();
-        List<CocktailDBResponse.DrinkResource> drinkResourceList = cocktailDBResponse.getDrinks();
-        for (CocktailDBResponse.DrinkResource drinkResource : drinkResourceList) {
-            CocktailResource cocktailResource = new CocktailResource();
-            cocktailResource.setCocktailId(drinkResource.getIdDrink());
-            cocktailResource.setName(drinkResource.getStrDrink());
-            cocktailResource.setGlass(drinkResource.getStrGlass());
-            cocktailResource.setInstructions(drinkResource.getStrInstructions());
-            cocktailResource.setImage(drinkResource.getStrDrinkThumb());
-            cocktailResource.setIngredients(this.getIngredients(drinkResource));
-            cocktailResourceList.add(cocktailResource);
-        }
+        return cocktailService.searchCocktails(search);
 
-        return cocktailResourceList;
+//        CocktailDBResponse cocktailDBResponse = cocktailDBClient.searchCocktails(search);
+//        List<CocktailResource> cocktailResourceList = new ArrayList<>();
+//        List<CocktailDBResponse.DrinkResource> drinkResourceList = cocktailDBResponse.getDrinks();
+//        for (CocktailDBResponse.DrinkResource drinkResource : drinkResourceList) {
+//            CocktailResource cocktailResource = new CocktailResource();
+//            cocktailResource.setCocktailId(drinkResource.getIdDrink());
+//            cocktailResource.setName(drinkResource.getStrDrink());
+//            cocktailResource.setGlass(drinkResource.getStrGlass());
+//            cocktailResource.setInstructions(drinkResource.getStrInstructions());
+//            cocktailResource.setImage(drinkResource.getStrDrinkThumb());
+//            cocktailResource.setIngredients(this.getIngredients(drinkResource));
+//            cocktailResourceList.add(cocktailResource);
+//        }
+//        return cocktailResourceList;
 
 //        return getDummyResources();
     }
 
-    private List<String> getIngredients(CocktailDBResponse.DrinkResource drinkResource) {
-        return
-        Stream.of(
-            drinkResource.getStrIngredient1(),
-            drinkResource.getStrIngredient2(),
-            drinkResource.getStrIngredient3(),
-            drinkResource.getStrIngredient4(),
-            drinkResource.getStrIngredient5(),
-            drinkResource.getStrIngredient6(),
-            drinkResource.getStrIngredient7()
-            ).filter(
-            i -> !Strings.isNullOrEmpty(i)
-            ).collect(
-            Collectors.toList());
+//    private List<String> getIngredients(CocktailDBResponse.DrinkResource drinkResource) {
+//        return
+//        Stream.of(
+//            drinkResource.getStrIngredient1(),
+//            drinkResource.getStrIngredient2(),
+//            drinkResource.getStrIngredient3(),
+//            drinkResource.getStrIngredient4(),
+//            drinkResource.getStrIngredient5(),
+//            drinkResource.getStrIngredient6(),
+//            drinkResource.getStrIngredient7()
+//            ).filter(
+//            i -> !Strings.isNullOrEmpty(i)
+//            ).collect(
+//            Collectors.toList());
 
 //        List<String> ingredientList = new ArrayList<>();
 //        ingredientList.add(drinkResource.getStrIngredient1());
@@ -103,7 +111,7 @@ public class CocktailController {
 //            ingredientList.add(drinkResource.getStrIngredient15());
 
 //        return ingredientList;
-    }
+//    }
 
 //    private List<CocktailResource> getDummyResources() {
 //        return Arrays.asList(

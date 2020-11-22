@@ -6,6 +6,7 @@ import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @since release/ (2020-11-01)
  * Shopping List API
  */
-@RestController
+//@RestController
 //@RequestMapping(value = "/shopping-lists", produces = "application/json")     // verplaatst naar Service-call niveau
 public class ShoppingListController {
 
     private final ShoppingListService shoppingListService;
 
-    @Autowired
+//    @Autowired
     public ShoppingListController(ShoppingListService shoppingListService) {
         this.shoppingListService = shoppingListService;
     }
@@ -39,9 +40,12 @@ public class ShoppingListController {
     @PostMapping
     @RequestMapping(value = "/shopping-lists", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
-        return shoppingListService.createShoppingList(shoppingList);
+    public ShoppingList createShoppingList(@RequestBody String name) {
+        return shoppingListService.createShoppingList(name);
     }
+//    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
+//        return shoppingListService.createShoppingList(shoppingList);
+//    }
 
 
 //    Add cocktails to a shopping list
@@ -50,6 +54,8 @@ public class ShoppingListController {
     @ResponseStatus(HttpStatus.CREATED)
 //    public CocktailList addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
     public List<String> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
+        List<String> cocktails = cocktailResource.stream().map(map -> map.getCocktailId()).collect(Collectors.toList());
+        shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
         return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktailResource);
     }
 

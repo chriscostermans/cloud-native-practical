@@ -1,6 +1,7 @@
 package com.ezgroceries.shoppinglist.internal.cocktail;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Chris Costermans (u24390)
@@ -8,6 +9,6 @@ import java.util.List;
  */
 public interface CocktailRepository {
 
-    List<CocktailEntity> findByIdDrink(String idDrink);
-    List<CocktailEntity> findAll();
+    List<CocktailEntity> findByIdDrinkIn(List<String> cocktailIds);
+    List<CocktailEntity> findAllByIdDrinkIn(List<UUID> cocktailIds);
 }

@@ -1,6 +1,5 @@
 package com.ezgroceries.shoppinglist.internal.shoppingList;
 
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
 import java.util.List;
 
 /**
