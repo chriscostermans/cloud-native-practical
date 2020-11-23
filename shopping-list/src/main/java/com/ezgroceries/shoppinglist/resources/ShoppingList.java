@@ -11,12 +11,17 @@ public class ShoppingList {
 
     private UUID shoppingListId;
     private String name;
-    private List<String> cocktailId;
+    private List<UUID> cocktailId;
 
     public ShoppingList(){
     }
 
-    public ShoppingList(UUID shoppingListId, String name, List<String> cocktailId) {
+    public ShoppingList(UUID shoppingListId, String name) {
+        this.shoppingListId = shoppingListId;
+        this.name = name;
+    }
+
+    public ShoppingList(UUID shoppingListId, String name, List<UUID> cocktailId) {
         this.shoppingListId = shoppingListId;
         this.name = name;
         this.cocktailId = cocktailId;
@@ -38,11 +43,11 @@ public class ShoppingList {
         this.name = name;
     }
 
-    public List<String> getCocktailId() {
+    public List<UUID> getCocktailId() {
         return cocktailId;
     }
 
-    public void setCocktailId(List<String> cocktailId) {
+    public void setCocktailId(List<UUID> cocktailId) {
         this.cocktailId = cocktailId;
     }
 }

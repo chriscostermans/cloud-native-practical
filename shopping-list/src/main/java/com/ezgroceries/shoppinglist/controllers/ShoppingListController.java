@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since release/ (2020-11-01)
  * Shopping List API
  */
-//@RestController
+@RestController
 //@RequestMapping(value = "/shopping-lists", produces = "application/json")     // verplaatst naar Service-call niveau
 public class ShoppingListController {
 
@@ -53,10 +53,8 @@ public class ShoppingListController {
     @RequestMapping(value = "/shopping-lists/{shoppingListId}/cocktails", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
 //    public CocktailList addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
-    public List<String> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
-        List<String> cocktails = cocktailResource.stream().map(map -> map.getCocktailId()).collect(Collectors.toList());
-        shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
-        return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktailResource);
+    public List<String> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<String> cocktails) {
+        return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
     }
 
 

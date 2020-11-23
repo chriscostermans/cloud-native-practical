@@ -30,10 +30,11 @@ public class CocktailEntity {
     public CocktailEntity() {
     }
 
-    public CocktailEntity(UUID id, String idDrink, String name) {
+    public CocktailEntity(UUID id, String idDrink, String name, Set<String> ingredients) {
         this.id = id;
         this.idDrink = idDrink;
         this.name = name;
+        this.ingredients = ingredients;
     }
 
     public UUID getId() {

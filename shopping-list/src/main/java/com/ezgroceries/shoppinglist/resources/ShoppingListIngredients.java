@@ -16,6 +16,10 @@ public class ShoppingListIngredients {
     public ShoppingListIngredients(){
     }
 
+    public ShoppingListIngredients(UUID shoppingListId, String name) {
+        this.shoppingListId = shoppingListId;
+        this.name = name;
+    }
     public ShoppingListIngredients(UUID shoppingListId, String name, List<String> ingredients) {
         this.shoppingListId = shoppingListId;
         this.name = name;

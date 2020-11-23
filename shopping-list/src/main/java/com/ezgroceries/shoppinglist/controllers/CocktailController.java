@@ -11,6 +11,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import jdk.internal.joptsimple.internal.Strings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class CocktailController {
 
     private final CocktailService cocktailService;
 
+//    @Autowired
     private CocktailController(CocktailService cocktailService) {
         this.cocktailService = cocktailService;
     }

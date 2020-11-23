@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import jdk.internal.joptsimple.internal.Strings;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,20 +29,12 @@ public class CocktailService {
         this.cocktailDBClient = cocktailDBClient;
     }
 
-//    CocktailResource cocktailResource = new CocktailResource();
-//
-//    public CocktailResource getCocktailResource(UUID cocktailId){
-//        CocktailResource cocktailResource = new CocktailResource();
-//
-//        return cocktailResource;
-//    }
-
     public List<CocktailResource> searchCocktails(String search) {
         CocktailDBResponse cocktailDBResponse = cocktailDBClient.searchCocktails(search);
         return mergeCocktails(cocktailDBResponse.getDrinks());
     }
 
-    public List<CocktailResource> mergeCocktails(List<CocktailDBResponse.DrinkResource> drinks) {
+    private List<CocktailResource> mergeCocktails(List<CocktailDBResponse.DrinkResource> drinks) {
         //Get all the idDrink attributes
         List<String> ids = drinks.stream().map(CocktailDBResponse.DrinkResource::getIdDrink).collect(Collectors.toList());
 
@@ -69,7 +63,23 @@ public class CocktailService {
             drinkResource.getStrInstructions(), drinkResource.getStrDrinkThumb(), getIngredients(drinkResource))).collect(Collectors.toList());
     }
 
-    public List<CocktailEntity> findAllById(List<String> cocktails) {
-        return cocktailRepository.findAllByIdDrinkIn(cocktails.stream().map(UUID::fromString).collect(Collectors.toList()));
+    private List<String> getIngredients(CocktailDBResponse.DrinkResource drinkResource) {
+        return
+        Stream.of(
+            drinkResource.getStrIngredient1(),
+            drinkResource.getStrIngredient2(),
+            drinkResource.getStrIngredient3(),
+            drinkResource.getStrIngredient4(),
+            drinkResource.getStrIngredient5(),
+            drinkResource.getStrIngredient6(),
+            drinkResource.getStrIngredient7()
+            ).filter(
+            i -> !Strings.isNullOrEmpty(i)
+            ).collect(
+            Collectors.toList());
+    }
+
+    public List<CocktailEntity> findByCocktailId(List<String> cocktails) {
+        return cocktailRepository.findByCocktailIdIn(cocktails.stream().map(UUID::fromString).collect(Collectors.toList()));
     }
 }

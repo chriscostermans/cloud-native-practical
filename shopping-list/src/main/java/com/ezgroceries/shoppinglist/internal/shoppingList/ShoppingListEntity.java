@@ -30,6 +30,8 @@ public class ShoppingListEntity {
         inverseJoinColumns = @JoinColumn(name = "COCKTAIL_ID"))
     private List<CocktailEntity> cocktails;
 
+    public ShoppingListEntity () {
+    }
     public ShoppingListEntity (String name){
         this.id = UUID.randomUUID();
         this.name = name;
@@ -59,11 +61,11 @@ public class ShoppingListEntity {
         this.cocktails = cocktails;
     }
 
-    public void addCocktails(CocktailEntity... cocktails) {
+    public void addCocktailsToShoppingList(CocktailEntity... cocktails) {
         this.cocktails.addAll(Arrays.asList(cocktails));
     }
 
-    public void addCocktails(List<CocktailEntity> cocktails) {
+    public void addCocktailsToShoppingList(List<CocktailEntity> cocktails) {
         if (this.cocktails == null) {
             setCocktails(cocktails);
         }
