@@ -7,10 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.controllers.CocktailController;
 import com.ezgroceries.shoppinglist.resources.CocktailResource;
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
-import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
 import com.ezgroceries.shoppinglist.services.CocktailService;
 import java.util.ArrayList;
 import java.util.Arrays;

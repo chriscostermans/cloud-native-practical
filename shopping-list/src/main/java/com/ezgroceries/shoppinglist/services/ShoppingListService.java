@@ -7,7 +7,6 @@ import com.ezgroceries.shoppinglist.resources.CocktailResource;
 import com.ezgroceries.shoppinglist.resources.ShoppingList;
 import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -90,8 +89,8 @@ public class ShoppingListService {
 //            "Stephanie's birthday",
 //            Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt", "Blue Curacao"));
 //        return shoppingListIngredients;
-        Optional<ShoppingListEntity> shoppingListResource = shoppingListRepository.findById(shoppingListId);
-        return shoppingListResource.map(this::fillCocktails)
+        Optional<ShoppingListEntity> shoppingListIngredients = shoppingListRepository.findById(shoppingListId);
+        return shoppingListIngredients.map(this::fillCocktails)
             .orElseThrow(() -> new RuntimeException("shoppingLstId " + shoppingListId + " not found"));
     }
 

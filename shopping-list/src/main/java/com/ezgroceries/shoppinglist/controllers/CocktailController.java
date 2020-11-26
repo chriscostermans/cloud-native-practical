@@ -1,17 +1,10 @@
 package com.ezgroceries.shoppinglist.controllers;
 
-import com.ezgroceries.shoppinglist.client.CocktailDBClient;
-import com.ezgroceries.shoppinglist.client.CocktailDBResponse;
 import com.ezgroceries.shoppinglist.resources.CocktailResource;
 import com.ezgroceries.shoppinglist.services.CocktailService;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import jdk.internal.joptsimple.internal.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

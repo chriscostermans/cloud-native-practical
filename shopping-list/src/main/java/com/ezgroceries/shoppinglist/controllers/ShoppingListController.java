@@ -1,13 +1,10 @@
 package com.ezgroceries.shoppinglist.controllers;
 
-import com.ezgroceries.shoppinglist.resources.CocktailResource;
 import com.ezgroceries.shoppinglist.resources.ShoppingList;
 import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
