@@ -118,9 +118,9 @@ public class ShoppingListService {
 
     private ShoppingListIngredients fillCocktailIngredients(ShoppingListEntity entity){
         ShoppingListIngredients shoppingListIngredients = fillCocktails(entity);
-        List<CocktailEntity> entities = (entity.getCocktails() != null) ? entity.getCocktails() : new ArrayList<>();
-        List<String> ids = entities.stream().map(CocktailEntity::getId).map(UUID::toString).collect(Collectors.toList());
-        List<String> ingredients = cocktailService.findByCocktailId(ids).stream().map(CocktailEntity::getIngredients).flatMap(Set::stream).distinct().collect(Collectors.toList());
+        List<CocktailEntity> cocktailEntities = (entity.getCocktails() != null) ? entity.getCocktails() : new ArrayList<>();
+        List<String> cocktailIds = cocktailEntities.stream().map(CocktailEntity::getId).map(UUID::toString).collect(Collectors.toList());
+        List<String> ingredients = cocktailService.findByCocktailId(cocktailIds).stream().map(CocktailEntity::getIngredients).flatMap(Set::stream).distinct().collect(Collectors.toList());
         shoppingListIngredients.addIngredients(ingredients);
         return shoppingListIngredients;
     }
