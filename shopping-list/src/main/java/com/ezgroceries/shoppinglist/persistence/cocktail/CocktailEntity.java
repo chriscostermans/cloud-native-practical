@@ -1,5 +1,6 @@
-package com.ezgroceries.shoppinglist.internal.cocktail;
+package com.ezgroceries.shoppinglist.persistence.cocktail;
 
+import com.ezgroceries.utils.StringSetConverter;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;

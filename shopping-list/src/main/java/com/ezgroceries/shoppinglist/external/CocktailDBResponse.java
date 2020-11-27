@@ -1,7 +1,6 @@
-package com.ezgroceries.shoppinglist.client;
+package com.ezgroceries.shoppinglist.external;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Chris Costermans (u24390)

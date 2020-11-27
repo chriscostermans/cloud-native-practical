@@ -1,10 +1,10 @@
 package com.ezgroceries.shoppinglist.services;
 
-import com.ezgroceries.shoppinglist.client.CocktailDBClient;
-import com.ezgroceries.shoppinglist.client.CocktailDBResponse;
-import com.ezgroceries.shoppinglist.internal.cocktail.CocktailEntity;
-import com.ezgroceries.shoppinglist.internal.cocktail.CocktailRepository;
-import com.ezgroceries.shoppinglist.resources.CocktailResource;
+import com.ezgroceries.shoppinglist.external.CocktailDBClient;
+import com.ezgroceries.shoppinglist.external.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
+import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailRepository;
+import com.ezgroceries.shoppinglist.contracts.resources.CocktailResource;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

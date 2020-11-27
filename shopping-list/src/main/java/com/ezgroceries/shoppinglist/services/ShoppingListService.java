@@ -1,11 +1,11 @@
 package com.ezgroceries.shoppinglist.services;
 
-import com.ezgroceries.shoppinglist.internal.cocktail.CocktailEntity;
-import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListEntity;
-import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListRepository;
-import com.ezgroceries.shoppinglist.resources.CocktailResource;
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
-import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
+import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
+import com.ezgroceries.shoppinglist.persistence.shoppingList.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.persistence.shoppingList.ShoppingListRepository;
+import com.ezgroceries.shoppinglist.contracts.resources.CocktailResource;
+import com.ezgroceries.shoppinglist.contracts.response.ShoppingListResponse;
+import com.ezgroceries.shoppinglist.contracts.resources.ShoppingListResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,10 +30,10 @@ public class ShoppingListService {
         this.cocktailService = cocktailService;
     }
 
-    public ShoppingList createShoppingList(String name){
+    public ShoppingListResponse createShoppingList(String name){
         ShoppingListEntity shoppingListEntity = new ShoppingListEntity(name);
         ShoppingListEntity newShoppingList = shoppingListRepository.save(shoppingListEntity);
-        return new ShoppingList(newShoppingList.getId(), newShoppingList.getName());
+        return new ShoppingListResponse(newShoppingList.getId(), newShoppingList.getName());
     }
 
 //    public CocktailList addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){
@@ -83,7 +83,7 @@ public class ShoppingListService {
         return id;
     }
 
-    public ShoppingListIngredients getShoppingListIngredients(UUID shoppingListId) {
+    public ShoppingListResource getShoppingListIngredients(UUID shoppingListId) {
 //        ShoppingListIngredients shoppingListIngredients = new ShoppingListIngredients(
 //            shoppingListId,
 //            "Stephanie's birthday",
@@ -94,11 +94,11 @@ public class ShoppingListService {
             .orElseThrow(() -> new RuntimeException("shoppingLstId " + shoppingListId + " not found"));
     }
 
-    private ShoppingListIngredients fillCocktails(ShoppingListEntity shoppingListEntity) {
-        return new ShoppingListIngredients(shoppingListEntity.getId(), shoppingListEntity.getName());
+    private ShoppingListResource fillCocktails(ShoppingListEntity shoppingListEntity) {
+        return new ShoppingListResource(shoppingListEntity.getId(), shoppingListEntity.getName());
     }
 
-    public List<ShoppingListIngredients> getShoppingLists() {
+    public List<ShoppingListResource> getShoppingLists() {
         List<ShoppingListEntity> shoppingListEntity = shoppingListRepository.findAll();
         return shoppingListEntity.stream().map(this::fillCocktailIngredients).collect(Collectors.toList());
 //        ShoppingListIngredients shoppingListIngredients = new ShoppingListIngredients(shoppingListEntity.getId(), shoppingListEntity.getname());
@@ -115,12 +115,12 @@ public class ShoppingListService {
 //        return shoppingListIngredients;
     }
 
-    private ShoppingListIngredients fillCocktailIngredients(ShoppingListEntity entity){
-        ShoppingListIngredients shoppingListIngredients = fillCocktails(entity);
+    private ShoppingListResource fillCocktailIngredients(ShoppingListEntity entity){
+        ShoppingListResource shoppingListResource = fillCocktails(entity);
         List<CocktailEntity> cocktailEntities = (entity.getCocktails() != null) ? entity.getCocktails() : new ArrayList<>();
         List<String> cocktailIds = cocktailEntities.stream().map(CocktailEntity::getId).map(UUID::toString).collect(Collectors.toList());
         List<String> ingredients = cocktailService.findByCocktailId(cocktailIds).stream().map(CocktailEntity::getIngredients).flatMap(Set::stream).distinct().collect(Collectors.toList());
-        shoppingListIngredients.addIngredients(ingredients);
-        return shoppingListIngredients;
+        shoppingListResource.addIngredients(ingredients);
+        return shoppingListResource;
     }
 }

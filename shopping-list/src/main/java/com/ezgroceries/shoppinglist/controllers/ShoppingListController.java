@@ -1,7 +1,7 @@
 package com.ezgroceries.shoppinglist.controllers;
 
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
-import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
+import com.ezgroceries.shoppinglist.contracts.response.ShoppingListResponse;
+import com.ezgroceries.shoppinglist.contracts.resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +37,7 @@ public class ShoppingListController {
     @PostMapping
     @RequestMapping(value = "/shopping-lists", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingList createShoppingList(@RequestBody String name) {
+    public ShoppingListResponse createShoppingList(@RequestBody String name) {
         return shoppingListService.createShoppingList(name);
     }
 //    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
@@ -59,7 +59,7 @@ public class ShoppingListController {
     @GetMapping
     @RequestMapping(value = "/shopping-lists/{shoppingListId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public ShoppingListIngredients getShoppingListsIngredients(@PathVariable UUID shoppingListId) {
+    public ShoppingListResource getShoppingListsIngredients(@PathVariable UUID shoppingListId) {
         return shoppingListService.getShoppingListIngredients(shoppingListId);
     }
 
@@ -68,7 +68,7 @@ public class ShoppingListController {
     @GetMapping
     @RequestMapping(value = "/shopping-lists", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<ShoppingListIngredients> getShoppingLists() {
+    public List<ShoppingListResource> getShoppingLists() {
         return shoppingListService.getShoppingLists();
     }
 

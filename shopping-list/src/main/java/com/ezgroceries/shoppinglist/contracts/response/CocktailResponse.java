@@ -1,4 +1,4 @@
-package com.ezgroceries.shoppinglist.resources;
+package com.ezgroceries.shoppinglist.contracts.response;
 
 import java.util.List;
 import java.util.UUID;
@@ -7,7 +7,8 @@ import java.util.UUID;
  * @author Chris Costermans (u24390)
  * @since release/ (2020-11-02)
  */
-public class CocktailList {
+public class CocktailResponse {
+
     private List<UUID> cocktailIds;
 
     public List<UUID> getCocktailIds() {

@@ -1,6 +1,5 @@
-package com.ezgroceries.shoppinglist.internal.cocktail;
+package com.ezgroceries.shoppinglist.persistence.cocktail;
 
-import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListEntity;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.repository.Repository;

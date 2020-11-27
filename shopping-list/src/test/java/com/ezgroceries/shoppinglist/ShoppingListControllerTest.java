@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
-import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
+import com.ezgroceries.shoppinglist.contracts.response.ShoppingListResponse;
+import com.ezgroceries.shoppinglist.contracts.resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class ShoppingListControllerTest {
         final String givenName = "Stephanie's birthday";
         final UUID expectedId = UUID.fromString("eb18bb7c-61f3-4c9f-981c-55b1b8ee8915");    // body
         final String expectedName = "Stephanie's birthday";     // body
-        ShoppingList mockShoppingList = new ShoppingList();
+        ShoppingListResponse mockShoppingList = new ShoppingListResponse();
         mockShoppingList.setShoppingListId(expectedId);
         mockShoppingList.setName(expectedName);
         given(shoppingListService.createShoppingList(givenName)).willReturn(mockShoppingList);
@@ -92,11 +92,11 @@ public class ShoppingListControllerTest {
         final UUID expectedId = UUID.fromString("eb18bb7c-61f3-4c9f-981c-55b1b8ee8915");
         final String expectedName = "Stephanie's birthday";                     // response
         final List<String> expectedIngredients = Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt", "Blue Curacao");  // response
-        ShoppingListIngredients mockShoppingListIngredients = new ShoppingListIngredients();
-        mockShoppingListIngredients.setShoppingListId(expectedId);
-        mockShoppingListIngredients.setName(expectedName);
-        mockShoppingListIngredients.setIngredients(expectedIngredients);
-        given(shoppingListService.getShoppingListIngredients(givenId)).willReturn(mockShoppingListIngredients);
+        ShoppingListResource mockShoppingListResource = new ShoppingListResource();
+        mockShoppingListResource.setShoppingListId(expectedId);
+        mockShoppingListResource.setName(expectedName);
+        mockShoppingListResource.setIngredients(expectedIngredients);
+        given(shoppingListService.getShoppingListIngredients(givenId)).willReturn(mockShoppingListResource);
 //        this.mockMvc.perform(get("/shopping-lists/{shoppingListId}")
         this.mockMvc.perform(get("/shopping-lists/eb18bb7c-61f3-4c9f-981c-55b1b8ee8915")
             .accept(MediaType.parseMediaType("application/json")))
@@ -120,16 +120,16 @@ public class ShoppingListControllerTest {
         final UUID expectedId2 = UUID.fromString("6c7d09c2-8a25-4d54-a979-25ae779d2465");
         final String expectedName2 = "My birthday";
         final List<String> expectedIngredients2 = Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt", "Blue Curacao");
-        List<ShoppingListIngredients> mockShoppingLists = new ArrayList<>();
-        ShoppingListIngredients mockShoppingListIngredients = new ShoppingListIngredients();
-        mockShoppingListIngredients.setShoppingListId(expectedId);
-        mockShoppingListIngredients.setName(expectedName);
-        mockShoppingListIngredients.setIngredients(expectedIngredients);
-        mockShoppingLists.add(mockShoppingListIngredients);
-        mockShoppingListIngredients.setShoppingListId(expectedId2);
-        mockShoppingListIngredients.setName(expectedName2);
-        mockShoppingListIngredients.setIngredients(expectedIngredients2);
-        mockShoppingLists.add(mockShoppingListIngredients);
+        List<ShoppingListResource> mockShoppingLists = new ArrayList<>();
+        ShoppingListResource mockShoppingListResource = new ShoppingListResource();
+        mockShoppingListResource.setShoppingListId(expectedId);
+        mockShoppingListResource.setName(expectedName);
+        mockShoppingListResource.setIngredients(expectedIngredients);
+        mockShoppingLists.add(mockShoppingListResource);
+        mockShoppingListResource.setShoppingListId(expectedId2);
+        mockShoppingListResource.setName(expectedName2);
+        mockShoppingListResource.setIngredients(expectedIngredients2);
+        mockShoppingLists.add(mockShoppingListResource);
         given(shoppingListService.getShoppingLists()).willReturn(mockShoppingLists);
         this.mockMvc.perform(get("/shopping-lists")
             .accept(MediaType.parseMediaType("application/json")))

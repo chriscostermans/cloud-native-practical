@@ -1,6 +1,6 @@
-package com.ezgroceries.shoppinglist.internal.shoppingList;
+package com.ezgroceries.shoppinglist.persistence.shoppingList;
 
-import com.ezgroceries.shoppinglist.internal.cocktail.CocktailEntity;
+import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;

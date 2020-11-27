@@ -1,9 +1,8 @@
-package com.ezgroceries.shoppinglist.internal.shoppingList;
+package com.ezgroceries.shoppinglist.persistence.shoppingList;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 /**

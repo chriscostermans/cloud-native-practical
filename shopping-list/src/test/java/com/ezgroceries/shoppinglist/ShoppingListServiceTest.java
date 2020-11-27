@@ -6,11 +6,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.ezgroceries.shoppinglist.internal.cocktail.CocktailEntity;
-import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListEntity;
-import com.ezgroceries.shoppinglist.internal.shoppingList.ShoppingListRepository;
-import com.ezgroceries.shoppinglist.resources.ShoppingList;
-import com.ezgroceries.shoppinglist.resources.ShoppingListIngredients;
+import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
+import com.ezgroceries.shoppinglist.persistence.shoppingList.ShoppingListEntity;
+import com.ezgroceries.shoppinglist.persistence.shoppingList.ShoppingListRepository;
+import com.ezgroceries.shoppinglist.contracts.response.ShoppingListResponse;
+import com.ezgroceries.shoppinglist.contracts.resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.services.CocktailService;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ShoppingListServiceTest {
 
     @Test
     public void testCreateShoppingList() {
-        ShoppingList newShoppingList = shoppingListService.createShoppingList("Stephanie's birthday");
+        ShoppingListResponse newShoppingList = shoppingListService.createShoppingList("Stephanie's birthday");
         assertNotNull(newShoppingList, "shoppingList should never be null");
         assertNotNull(newShoppingList.getShoppingListId(),"shoppingListId should never be null");
         assertEquals("Stephanie's birthday", newShoppingList.getName(), "wrong name");
@@ -75,11 +75,11 @@ public class ShoppingListServiceTest {
         List<String> foundingredients = Arrays.asList("Tequila", "Triple sec", "Lime juice", "Salt", "Blue Curacao");
         ShoppingListEntity foundShoppingList = new ShoppingListEntity(name);
         when(shoppingListRepository.findById(shoppingListId)).thenReturn(Optional.of(foundShoppingList));
-        ShoppingListIngredients shoppingListIngredients = shoppingListService.getShoppingListIngredients(shoppingListId);
-        List<String> in = shoppingListIngredients.getIngredients();
-        assertNotNull(shoppingListIngredients, "shoppingList should never be null");
-        assertEquals("Stephanie's birthday", shoppingListIngredients.getName(), "wrong name");
-        assertNotNull(shoppingListIngredients.getIngredients().size(), "ingredients should never be null");
+        ShoppingListResource shoppingListResource = shoppingListService.getShoppingListIngredients(shoppingListId);
+        List<String> in = shoppingListResource.getIngredients();
+        assertNotNull(shoppingListResource, "shoppingList should never be null");
+        assertEquals("Stephanie's birthday", shoppingListResource.getName(), "wrong name");
+        assertNotNull(shoppingListResource.getIngredients().size(), "ingredients should never be null");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class ShoppingListServiceTest {
         ShoppingListEntity shoppingListEntity2 = new ShoppingListEntity(name2);
         List<ShoppingListEntity> foundshoppingLists = Arrays.asList(shoppingListEntity,shoppingListEntity2);
         when(shoppingListRepository.findAll()).thenReturn(foundshoppingLists);
-        List<ShoppingListIngredients> shoppingLists = shoppingListService.getShoppingLists();
+        List<ShoppingListResource> shoppingLists = shoppingListService.getShoppingLists();
         assertNotNull(shoppingLists, "shoppingLists should never be null");
         assertEquals(expectedNumbersOfLists, shoppingLists.size(),"shoppingList size should be 2");
         assertEquals(name,shoppingLists.get(0).getName(),"wrong name");
