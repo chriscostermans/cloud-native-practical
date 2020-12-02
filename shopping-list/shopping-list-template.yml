@@ -82,3 +82,5 @@ spec:
   to:
     kind: Service
     name: shopping-list
+  tls:
+    teminationn: passthrough
