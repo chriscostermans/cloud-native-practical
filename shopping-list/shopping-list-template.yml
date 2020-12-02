@@ -22,3 +22,63 @@ spec:
               exec:
                 # SIGTERM triggers a quick exit; gracefully terminate instead
                 command: ["kill", "-SIGINT", "`pidof java`"]
+          readinessProbe:
+            exec:
+              command:
+                - cat
+                - /tmp/ready
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - cat
+                - /tmp/healthy
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{spring_profile}}
+          resources:
+            requests:
+              cpu: {{cpu_request or '500m'}}
+              memory: {{memory_request or '1Gi'}}
+            limits:
+              cpu: {{cpu_limit or '1000m'}}
+              memory: {{memory_limit or '2.5Gi'}}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: shopping-list-service
+spec:
+  type: Loadbalancer
+  selector:
+    name: shopping-list
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: shopping-list-service2
+spec:
+  type: Loadbalancer
+  selector:
+    name: shopping-list
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 8443
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    component: shopping-list
+  name: shopping-list
+spec:
+  to:
+    kind: Service
+    name: shopping-list

@@ -39,7 +39,7 @@ public class ShoppingListServiceTest {
 
     @Test
     public void testCreateShoppingList() {
-        ShoppingListResponse newShoppingList = shoppingListService.createShoppingList("Stephanie's birthday");
+        ShoppingListResource newShoppingList = shoppingListService.createShoppingList("Stephanie's birthday");
         assertNotNull(newShoppingList, "shoppingList should never be null");
         assertNotNull(newShoppingList.getShoppingListId(),"shoppingListId should never be null");
         assertEquals("Stephanie's birthday", newShoppingList.getName(), "wrong name");

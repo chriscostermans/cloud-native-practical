@@ -50,7 +50,7 @@ public class ShoppingListControllerTest {
         final String givenName = "Stephanie's birthday";
         final UUID expectedId = UUID.fromString("eb18bb7c-61f3-4c9f-981c-55b1b8ee8915");    // body
         final String expectedName = "Stephanie's birthday";     // body
-        ShoppingListResponse mockShoppingList = new ShoppingListResponse();
+        ShoppingListResource mockShoppingList = new ShoppingListResource();
         mockShoppingList.setShoppingListId(expectedId);
         mockShoppingList.setName(expectedName);
         given(shoppingListService.createShoppingList(givenName)).willReturn(mockShoppingList);

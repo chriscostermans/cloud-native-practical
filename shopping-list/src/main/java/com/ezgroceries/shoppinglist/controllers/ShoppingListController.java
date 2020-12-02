@@ -37,7 +37,7 @@ public class ShoppingListController {
     @PostMapping
     @RequestMapping(value = "/shopping-lists", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingListResponse createShoppingList(@RequestBody String name) {
+    public ShoppingListResource createShoppingList(@RequestBody String name) {
         return shoppingListService.createShoppingList(name);
     }
 //    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {

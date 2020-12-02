@@ -30,10 +30,10 @@ public class ShoppingListService {
         this.cocktailService = cocktailService;
     }
 
-    public ShoppingListResponse createShoppingList(String name){
+    public ShoppingListResource createShoppingList(String name){
         ShoppingListEntity shoppingListEntity = new ShoppingListEntity(name);
         ShoppingListEntity newShoppingList = shoppingListRepository.save(shoppingListEntity);
-        return new ShoppingListResponse(newShoppingList.getId(), newShoppingList.getName());
+        return new ShoppingListResource(newShoppingList.getId(), newShoppingList.getName());
     }
 
 //    public CocktailList addCocktailsToShoppingList(UUID shoppingListId, List<CocktailResource> cocktailResource){
