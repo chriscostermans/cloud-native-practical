@@ -2,11 +2,15 @@ package com.ezgroceries.shoppinglist.services;
 
 import com.ezgroceries.shoppinglist.external.CocktailDBClient;
 import com.ezgroceries.shoppinglist.external.CocktailDBResponse;
+import com.ezgroceries.shoppinglist.external.CocktailDBResponse.DrinkResource;
 import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
 import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailRepository;
 import com.ezgroceries.shoppinglist.contracts.resources.CocktailResource;
+import com.ezgroceries.utils.StringSetConverter;
+import io.micrometer.core.instrument.util.StringUtils;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,6 +53,7 @@ public class CocktailService {
                 newCocktailEntity.setId(UUID.randomUUID());
                 newCocktailEntity.setIdDrink(drinkResource.getIdDrink());
                 newCocktailEntity.setName(drinkResource.getStrDrink());
+                newCocktailEntity.setIngredients(getIngredientsSet(drinkResource));
                 cocktailEntity = cocktailRepository.save(newCocktailEntity);
             }
             return cocktailEntity;
@@ -73,10 +78,23 @@ public class CocktailService {
             drinkResource.getStrIngredient5(),
             drinkResource.getStrIngredient6(),
             drinkResource.getStrIngredient7()
-            ).filter(
-            i -> !Strings.isNullOrEmpty(i)
-            ).collect(
-            Collectors.toList());
+        ).filter(StringUtils::isNotBlank).collect(Collectors.toList());
+//            ).filter(
+//            i -> !Strings.isNullOrEmpty(i)
+//            ).collect(
+//            Collectors.toList());
+    }
+
+    private Set<String> getIngredientsSet(DrinkResource drinkResource) {
+        return Stream.of(
+            drinkResource.getStrIngredient1(),
+            drinkResource.getStrIngredient2(),
+            drinkResource.getStrIngredient3(),
+            drinkResource.getStrIngredient4(),
+            drinkResource.getStrIngredient5(),
+            drinkResource.getStrIngredient6(),
+            drinkResource.getStrIngredient7()
+        ).filter(StringUtils::isNotBlank).collect(Collectors.toSet());
     }
 
     public List<CocktailEntity> findByCocktailId(List<String> cocktails) {
