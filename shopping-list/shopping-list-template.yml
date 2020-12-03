@@ -58,19 +58,12 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: shopping-list-service2
-spec:
-  type: Loadbalancer
-  selector:
-    name: shopping-list
-  ports:
-    - protocol: TCP
-      port: 443
+      protocol: TCP
+      name: http
+    - port: 443
       targetPort: 8443
+      protocol: TCP
+      name: https
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
