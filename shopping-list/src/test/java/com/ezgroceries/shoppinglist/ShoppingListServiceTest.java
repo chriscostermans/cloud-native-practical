@@ -57,9 +57,15 @@ public class ShoppingListServiceTest {
         CocktailEntity cocktailEntity = new CocktailEntity();
         cocktailEntity.setId(UUID.fromString(cocktailId));
         cocktailEntity.setName("Margerita");
+        cocktailEntity.setGlass("Cocktail glass");
+        cocktailEntity.setInstructions("Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only ...");
+        cocktailEntity.setImage("https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg");
         foundCocktails.add(cocktailEntity);
         cocktailEntity.setId(UUID.fromString(cocktailId2));
         cocktailEntity.setName("Blue Margerita");
+        cocktailEntity.setGlass("Cocktail glass");
+        cocktailEntity.setInstructions("Rub rim of cocktail glass with lime juice. Dip rim in coarse salt. Shake tequila, ...");
+        cocktailEntity.setImage("https://www.thecocktaildb.com/images/media/drink/bry4qh1582751040.jpg");
         foundCocktails.add(cocktailEntity);
         when(cocktailService.findByCocktailId(cocktails)).thenReturn(foundCocktails);
         when(shoppingListRepository.findById(shoppingListId)).thenReturn(Optional.of(shoppingListEntity));

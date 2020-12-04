@@ -6,7 +6,6 @@ import com.ezgroceries.shoppinglist.external.CocktailDBResponse.DrinkResource;
 import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailEntity;
 import com.ezgroceries.shoppinglist.persistence.cocktail.CocktailRepository;
 import com.ezgroceries.shoppinglist.contracts.resources.CocktailResource;
-import com.ezgroceries.utils.StringSetConverter;
 import io.micrometer.core.instrument.util.StringUtils;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +53,9 @@ public class CocktailService {
                 newCocktailEntity.setIdDrink(drinkResource.getIdDrink());
                 newCocktailEntity.setName(drinkResource.getStrDrink());
                 newCocktailEntity.setIngredients(getIngredientsSet(drinkResource));
+                newCocktailEntity.setGlass(drinkResource.getStrGlass());
+                newCocktailEntity.setInstructions(drinkResource.getStrInstructions());
+                newCocktailEntity.setImage(drinkResource.getStrDrinkThumb());
                 cocktailEntity = cocktailRepository.save(newCocktailEntity);
             }
             return cocktailEntity;
