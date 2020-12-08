@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import jdk.internal.joptsimple.internal.Strings;
+//import jdk.internal.joptsimple.internal.Strings;
 import org.springframework.stereotype.Service;
 
 /**
@@ -81,10 +81,6 @@ public class CocktailService {
             drinkResource.getStrIngredient6(),
             drinkResource.getStrIngredient7()
         ).filter(StringUtils::isNotBlank).collect(Collectors.toList());
-//            ).filter(
-//            i -> !Strings.isNullOrEmpty(i)
-//            ).collect(
-//            Collectors.toList());
     }
 
     private Set<String> getIngredientsSet(DrinkResource drinkResource) {
@@ -100,6 +96,6 @@ public class CocktailService {
     }
 
     public List<CocktailEntity> findByCocktailId(List<String> cocktails) {
-        return cocktailRepository.findByCocktailIdIn(cocktails.stream().map(UUID::fromString).collect(Collectors.toList()));
+        return cocktailRepository.findByIdIn(cocktails.stream().map(UUID::fromString).collect(Collectors.toList()));
     }
 }

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.ezgroceries.shoppinglist.contracts.resources.CocktailResource;
 import com.ezgroceries.shoppinglist.services.CocktailService;
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 /**
  * @author Chris Costermans (u24390)
@@ -65,30 +67,33 @@ public class CocktailControllerTests {
         mockCocktailResource.setName(expectedName);
         mockCocktailResource.setGlass(expectedGlass);
         mockCocktailResource.setInstructions(expectedInstructions);
+        mockCocktailResource.setImage(expectedImage);
         mockCocktailResource.setIngredients(expectedIngredients);
         mockCocktails.add(mockCocktailResource);
+        mockCocktailResource = new CocktailResource();
         mockCocktailResource.setCocktailId(expectedcocktailId2);
         mockCocktailResource.setName(expectedName2);
         mockCocktailResource.setGlass(expectedGlass2);
         mockCocktailResource.setInstructions(expectedInstructions2);
+        mockCocktailResource.setImage(expectedImage2);
         mockCocktailResource.setIngredients(expectedIngredients2);
         mockCocktails.add(mockCocktailResource);
         given(cocktailService.searchCocktails(givenSearch)).willReturn(mockCocktails);
-        mockMvc.perform(get("/cocktails?search=Russian")
+        ResultActions resultActions = mockMvc.perform(get("/cocktails?search=Russian")
             .accept(MediaType.parseMediaType("application/json")))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(content().contentType("application/json"))
             .andExpect(jsonPath("$.length()").value(expectedNumbersOfLists))
             .andExpect(jsonPath("$[0].name").value(expectedName))
             .andExpect(jsonPath("$[0].glass").value(expectedGlass))
             .andExpect(jsonPath("$[0].image").value(expectedImage))
             .andExpect(jsonPath("$[0].ingredients.length()").value(4))
-            .andExpect(jsonPath("$[0].ingredients").value(expectedIngredients))
+            .andExpect(jsonPath("$[0].ingredients").value(Lists.newArrayList(expectedIngredients)))
             .andExpect(jsonPath("$[1].name").value(expectedName2))
             .andExpect(jsonPath("$[1].glass").value(expectedGlass2))
             .andExpect(jsonPath("$[1].image").value(expectedImage2))
             .andExpect(jsonPath("$[1].ingredients.length()").value(4))
-            .andExpect(jsonPath("$[1].ingredients").value(expectedIngredients2));
+            .andExpect(jsonPath("$[1].ingredients").value(Lists.newArrayList(expectedIngredients2)));
         verify(cocktailService).searchCocktails("Russian");
     }
 }

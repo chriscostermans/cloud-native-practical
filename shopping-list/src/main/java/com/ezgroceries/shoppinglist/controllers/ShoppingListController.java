@@ -20,36 +20,26 @@ import org.springframework.web.bind.annotation.RestController;
  * Shopping List API
  */
 @RestController
-//@RequestMapping(value = "/shopping-lists", produces = "application/json")     // verplaatst naar Service-call niveau
 public class ShoppingListController {
 
     private final ShoppingListService shoppingListService;
 
-//    @Autowired
     public ShoppingListController(ShoppingListService shoppingListService) {
         this.shoppingListService = shoppingListService;
     }
 
-
-//    Create a new shopping list
-//    @PostMapping(consumes = "application/json")
-//    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @RequestMapping(value = "/shopping-lists", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingListResource createShoppingList(@RequestBody String name) {
         return shoppingListService.createShoppingList(name);
     }
-//    public ShoppingList createShoppingList(@RequestBody ShoppingList shoppingList) {
-//        return shoppingListService.createShoppingList(shoppingList);
-//    }
 
 
 //    Add cocktails to a shopping list
     @PostMapping
     @RequestMapping(value = "/shopping-lists/{shoppingListId}/cocktails", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-//    public CocktailList addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<CocktailResource> cocktailResource) {
     public List<String> addCocktailsToShoppingList(@PathVariable UUID shoppingListId, @RequestBody List<String> cocktails) {
         return shoppingListService.addCocktailsToShoppingList(shoppingListId, cocktails);
     }
