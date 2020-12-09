@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ezgroceries.shoppinglist.contracts.response.ShoppingListResponse;
 import com.ezgroceries.shoppinglist.contracts.resources.ShoppingListResource;
 import com.ezgroceries.shoppinglist.services.ShoppingListService;
 import com.google.common.collect.Lists;
@@ -41,11 +40,6 @@ public class ShoppingListControllerTest {
     @MockBean
     private ShoppingListService shoppingListService;
 
-//    @Resource
-//    private ShoppingList shoppingList;
-
-//    private Gson gson;
-
     @Test
     public void createShoppingListTest() throws Exception {
         final String givenName = "Stephanie's birthday";
@@ -77,16 +71,10 @@ public class ShoppingListControllerTest {
         mockCocktails.add(expectedCocktailId);
         mockCocktails.add(expectedcocktailId2);
         given(shoppingListService.addCocktailsToShoppingList(givenId, mockCocktails)).willReturn(mockCocktails);
-//        this.mockMvc.perform(post("/shopping-lists/{shoppingListId}/cocktails")
         this.mockMvc.perform(post("/shopping-lists/97c8e5bd-5353-426e-b57b-69eb2260ace3/cocktails")
             .accept(MediaType.parseMediaType("application/json"))
             .content("[{\"23b3d85a-3928-41c0-a533-6538a71e17c4\"}, {\"d615ec78-fe93-467b-8d26-5d26d8eab073\"}]")
             .contentType("application/json"));
-//            .andExpect(status().isOk())
-//            .andExpect(content().contentType("application/json"))
-//            .andExpect(jsonPath("$.length()").value(expectedNumbersOfLists))
-//            .andExpect(jsonPath("[0].cocktailId").value(expectedCocktailId))
-//            .andExpect(jsonPath("[1].cocktailId").value(expectedcocktailId2));
     }
 
 
@@ -102,7 +90,6 @@ public class ShoppingListControllerTest {
         mockShoppingListResource.setName(expectedName);
         mockShoppingListResource.setIngredients(expectedIngredients);
         given(shoppingListService.getShoppingListIngredients(givenId)).willReturn(mockShoppingListResource);
-//        this.mockMvc.perform(get("/shopping-lists/{shoppingListId}")
         this.mockMvc.perform(get("/shopping-lists/eb18bb7c-61f3-4c9f-981c-55b1b8ee8915")
             .accept(MediaType.parseMediaType("application/json")))
             .andExpect(status().isOk())

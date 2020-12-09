@@ -31,8 +31,6 @@ import org.springframework.test.web.servlet.ResultActions;
  * @author Chris Costermans (u24390)
  * @since release/ (2020-11-03)
  */
-//@AutoConfigureMockMvc
-//@SpringBootTest
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 @AutoConfigureMockMvc
@@ -79,7 +77,7 @@ public class CocktailControllerTests {
         mockCocktailResource.setIngredients(expectedIngredients2);
         mockCocktails.add(mockCocktailResource);
         given(cocktailService.searchCocktails(givenSearch)).willReturn(mockCocktails);
-        ResultActions resultActions = mockMvc.perform(get("/cocktails?search=Russian")
+        this.mockMvc.perform(get("/cocktails?search=Russian")
             .accept(MediaType.parseMediaType("application/json")))
             .andExpect(status().isOk())
             .andExpect(content().contentType("application/json"))

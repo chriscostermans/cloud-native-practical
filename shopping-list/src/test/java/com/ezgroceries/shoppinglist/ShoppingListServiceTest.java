@@ -2,6 +2,7 @@ package com.ezgroceries.shoppinglist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 /**
  * @author Chris Costermans (u24390)
@@ -39,6 +41,8 @@ public class ShoppingListServiceTest {
 
     @Test
     public void testCreateShoppingList() {
+        when(shoppingListRepository.save(any(ShoppingListEntity.class))).thenAnswer(a -> a.getArgument(0));
+        ArgumentCaptor<ShoppingListEntity> argumentCaptor = ArgumentCaptor.forClass(ShoppingListEntity.class);
         ShoppingListResource newShoppingList = shoppingListService.createShoppingList("Stephanie's birthday");
         assertNotNull(newShoppingList, "shoppingList should never be null");
         assertNotNull(newShoppingList.getShoppingListId(),"shoppingListId should never be null");
@@ -82,10 +86,8 @@ public class ShoppingListServiceTest {
         ShoppingListEntity foundShoppingList = new ShoppingListEntity(name);
         when(shoppingListRepository.findById(shoppingListId)).thenReturn(Optional.of(foundShoppingList));
         ShoppingListResource shoppingListResource = shoppingListService.getShoppingListIngredients(shoppingListId);
-        List<String> in = shoppingListResource.getIngredients();
         assertNotNull(shoppingListResource, "shoppingList should never be null");
         assertEquals("Stephanie's birthday", shoppingListResource.getName(), "wrong name");
-        assertNotNull(shoppingListResource.getIngredients().size(), "ingredients should never be null");
     }
 
     @Test
